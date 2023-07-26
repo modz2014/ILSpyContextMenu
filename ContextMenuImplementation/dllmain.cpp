@@ -3,7 +3,7 @@
 #include <wrl/module.h>
 #include <wrl/implements.h>
 #include <shobjidl_core.h>
-#include "../ContextMenuImplementation/wil/resource.h"
+#include "wil/resource.h"
 #include <Shellapi.h>
 #include <Shlwapi.h>
 #include <Strsafe.h>
