@@ -15,7 +15,7 @@ ContextMenu for ILSpy is a helpful extension that enhances the user experience o
 
 To use ContextMenu for ILSpy, follow these steps:
 
-1. Download the latest release from the [GitHub repository](https://github.com/modz2014/contextmenu-for-ilspy/releases).
+1. Download the latest release from the [GitHub repository](https://github.com/modz2014/ILSpyContextMenu/releases).
 2. Extract the downloaded ZIP file to a location of your choice.
 
 **Note: Before proceeding with the installation, you need to modify a line of code in the project to specify the location of the ILSpy executable.**
@@ -49,7 +49,7 @@ Now that you have the MSIX package, you can install the ContextMenu for ILSpy ex
 
 ## Feedback and Contributions
 
-Feedback, bug reports, and suggestions are welcome! If you encounter any issues or have ideas for improving the extension, please [open an issue](https://github.com/modz2014/contextmenu-for-ilspy/issues) on the GitHub repository.
+Feedback, bug reports, and suggestions are welcome! If you encounter any issues or have ideas for improving the extension, please [open an issue](https://github.com/modz2014/ILSpyContextMenu/issues) on the GitHub repository.
 
 If you'd like to contribute to the development of ContextMenu for ILSpy, you can fork the repository, make changes, and submit a pull request. Your contributions are highly appreciated.
 
