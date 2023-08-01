@@ -95,7 +95,7 @@ public:
         return S_OK;
     }
 
-    IFACEMETHODIMP Invoke(_In_opt_ IShellItemArray* selection, _In_opt_ IBindCtx*) noexcept try
+   /* IFACEMETHODIMP Invoke(_In_opt_ IShellItemArray* selection, _In_opt_ IBindCtx*) noexcept try
     {
         if (selection)
         {
@@ -134,49 +134,68 @@ public:
     }
     CATCH_RETURN();
 
-
-
-    IFACEMETHODIMP GetFlags(EXPCMDFLAGS* flags)
+*/
+// New way to use ILSpy.exe its based on where ILSpy.exe is installed your there location 
+  IFACEMETHODIMP Invoke(_In_opt_ IShellItemArray* selection, _In_opt_ IBindCtx*) noexcept try
     {
-        *flags = ECF_DEFAULT;
-
-        // Retrieve the file path of the selected item (if available)
-        wil::unique_cotaskmem_string filePath;
-        if (m_site)
+        if (selection)
         {
-            ComPtr<IUnknown> site;
-            if (SUCCEEDED(GetSite(IID_PPV_ARGS(&site))))
+            DWORD count;
+            RETURN_IF_FAILED(selection->GetCount(&count));
+            if (count > 0)
             {
-                ComPtr<IShellItemArray> selection;
-                if (SUCCEEDED(site.As(&selection)))
+                ComPtr<IShellItem> item;
+                RETURN_IF_FAILED(selection->GetItemAt(0, &item));
+
+                PWSTR filePath;
+                RETURN_IF_FAILED(item->GetDisplayName(SIGDN_FILESYSPATH, &filePath));
+                wil::unique_cotaskmem_string filePathCleanup(filePath);
+
+                // Check if the file has the correct extension
+
+                // Construct the path to ILSpy.exe
+                WCHAR ilspyExePath[MAX_PATH];
+                if (ExpandEnvironmentStrings(L"%LocalAppData%\\Programs\\ILSpy\\ILSpy.exe", ilspyExePath, MAX_PATH) == 0)
                 {
-                    DWORD count;
-                    if (SUCCEEDED(selection->GetCount(&count)) && count > 0)
-                    {
-                        ComPtr<IShellItem> item;
-                        if (SUCCEEDED(selection->GetItemAt(0, &item)))
-                        {
-                            PWSTR path = nullptr;
-                            if (SUCCEEDED(item->GetDisplayName(SIGDN_FILESYSPATH, &path)))
-                            {
-                                filePath.reset(path);
-                            }
-                        }
-                    }
+                    return E_FAIL;
                 }
+
+                // Quote the file path to handle spaces in the file name
+                std::wstring quotedFilePath = L"\"";
+                quotedFilePath += filePath;
+                quotedFilePath += L"\"";
+
+                // Quote the ILSpy executable path to handle spaces in the path
+                std::wstring quotedIlspyExePath = L"\"";
+                quotedIlspyExePath += ilspyExePath;
+                quotedIlspyExePath += L"\"";
+
+                // Create the command to launch ILSpy with the selected .exe file
+                std::wstring commandLine = quotedIlspyExePath + L" " + quotedFilePath;
+
+                STARTUPINFO startupInfo;
+                PROCESS_INFORMATION processInfo;
+
+                ZeroMemory(&startupInfo, sizeof(startupInfo));
+                startupInfo.cb = sizeof(startupInfo);
+
+                if (!CreateProcess(nullptr, const_cast<LPWSTR>(commandLine.c_str()), nullptr, nullptr, FALSE, 0, nullptr, nullptr, &startupInfo, &processInfo))
+                {
+                    return HRESULT_FROM_WIN32(GetLastError());
+                }
+
+                // Close the handles to the created process and thread
+                CloseHandle(processInfo.hProcess);
+                CloseHandle(processInfo.hThread);
             }
         }
 
-        // Check if the file has the correct extension
-        if (filePath && (PathMatchSpecW(filePath.get(), L"*.exe") || PathMatchSpecW(filePath.get(), L"*.dll")))
-        {
-            return S_OK;
-        }
-
-        // File doesn't have the correct extension, so hide the context menu
-        *flags = ECF_DEFAULT | ECF_HASSUBCOMMANDS;
         return S_OK;
     }
+    CATCH_RETURN();
+
+
+    IFACEMETHODIMP GetFlags(_Out_ EXPCMDFLAGS* flags) { *flags = ECF_DEFAULT; return S_OK; }
 
 
 
