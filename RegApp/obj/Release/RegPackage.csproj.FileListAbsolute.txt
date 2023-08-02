@@ -1,0 +1,9 @@
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\bin\Release\Reg.exe.config
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\bin\Release\Reg.exe
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\bin\Release\Reg.pdb
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\obj\Release\RegPackage.csproj.AssemblyReference.cache
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\obj\Release\RegPackage.csproj.CoreCompileInputs.cache
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\obj\Release\Reg.exe
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\obj\Release\refint\Reg.exe
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\obj\Release\Reg.pdb
+C:\Users\Modz2014\Downloads\ILSpy-master\ILSpy-master\ConsoleApp1\obj\Release\ref\Reg.exe
