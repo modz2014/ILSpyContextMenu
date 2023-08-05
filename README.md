@@ -1,4 +1,4 @@
-# ContextMenu for ILSpy - New Windows 11 Context Menu
+# ContextMenu for ILSpy - New Windows 11 Context Menu Including Windows 10 now
 
 
 ## Description
