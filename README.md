@@ -37,12 +37,7 @@ To use ContextMenu for ILSpy, follow these steps:
 1. Download the latest release from the [GitHub repository](https://github.com/modz2014/ILSpyContextMenu/releases).
 2. Extract the downloaded ZIP file to a location of your choice.
 
-**Note: Before proceeding with the installation, you need to modify a line of code in the project to specify the location of the ILSpy executable.**
 
-3. Open the project solution in your preferred IDE (e.g., Visual Studio).
-4. Locate the file responsible for invoking the ILSpy executable. This may be within the source code for the context menu functionality.
-5. Look for a line of code similar to this: `sei.lpFile = L"ILSpy.exe";`
-6. Modify the path `L"ILSpy.exe"` to point to the location where ILSpy is installed on your machine. For example: `sei.lpFile = L"C:\\Program Files\\ILSpy\\ILSpy.exe";`
 
 ## Building the MSIX Package
 
