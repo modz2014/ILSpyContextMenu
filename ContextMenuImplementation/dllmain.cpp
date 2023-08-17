@@ -135,7 +135,7 @@ public:
     CATCH_RETURN();
 
 */
-// New way to use ILSpy.exe its based on where ILSpy.exe is installed your there location 
+/*
   IFACEMETHODIMP Invoke(_In_opt_ IShellItemArray* selection, _In_opt_ IBindCtx*) noexcept try
     {
         if (selection)
@@ -193,7 +193,104 @@ public:
         return S_OK;
     }
     CATCH_RETURN();
+*/
 
+// Search the for the same location as  ILSpy.exe 
+ HRESULT LaunchILSpy(const wchar_t* filePath)
+    {
+        // Get a handle to the DLL
+        HMODULE hModule = GetModuleHandle(L"ContextMenuImplementation.dll");
+        if (!hModule)
+        {
+            // Debug message
+            MessageBox(nullptr, L"GetModuleHandle failed", L"Debug Info", MB_OK);
+
+            return HRESULT_FROM_WIN32(GetLastError());
+        }
+
+        // Get the path of the DLL
+        wchar_t dllPath[MAX_PATH];
+        GetModuleFileName(hModule, dllPath, MAX_PATH);
+
+        // Remove the filename to get the directory
+        PathRemoveFileSpec(dllPath);
+
+        // Construct the path to ILSpy.exe in the same directory
+        wchar_t ilspyPath[MAX_PATH];
+        PathCombine(ilspyPath, dllPath, L"ILSpy.exe");
+
+        // Debug message
+        //MessageBox(nullptr, ilspyPath, L"ILSpy Path", MB_OK);
+
+        // Check if ILSpy.exe exists and execute it
+        if (PathFileExists(ilspyPath))
+        {
+            SHELLEXECUTEINFO sei = { 0 };
+            sei.cbSize = sizeof(SHELLEXECUTEINFO);
+            sei.fMask = SEE_MASK_DEFAULT;
+            sei.lpVerb = L"open";
+            sei.lpFile = ilspyPath;
+            sei.lpParameters = filePath;
+            sei.nShow = SW_SHOWNORMAL;
+
+            if (!ShellExecuteEx(&sei))
+            {
+                // Debug message
+                MessageBox(nullptr, L"ShellExecuteEx failed", L"Debug Info", MB_OK);
+
+                return HRESULT_FROM_WIN32(GetLastError());
+            }
+
+            return S_OK;
+        }
+
+        // Debug message
+        MessageBox(nullptr, L"ILSpy.exe not found", L"Debug Info", MB_OK);
+
+        // ILSpy.exe not found
+        return HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND);
+    }
+
+
+    IFACEMETHODIMP Invoke(_In_opt_ IShellItemArray* selection, _In_opt_ IBindCtx*) noexcept try
+    {
+        if (!selection)
+        {
+            // Debug message
+            MessageBox(nullptr, L"Invalid argument", L"Debug Info", MB_OK);
+
+            return E_INVALIDARG;
+        }
+
+        DWORD count;
+        RETURN_IF_FAILED(selection->GetCount(&count));
+
+        if (count == 0)
+        {
+            // Debug message
+            MessageBox(nullptr, L"No items to process", L"Debug Info", MB_OK);
+
+            return S_OK; // No items to process
+        }
+
+        ComPtr<IShellItem> item;
+        RETURN_IF_FAILED(selection->GetItemAt(0, &item));
+
+        PWSTR filePath;
+        RETURN_IF_FAILED(item->GetDisplayName(SIGDN_FILESYSPATH, &filePath));
+        wil::unique_cotaskmem_string filePathCleanup(filePath);
+
+        // Check if the file has the correct extension
+
+        // Get the directory of the DLL
+        wchar_t dllPath[MAX_PATH];
+        GetModuleFileName(nullptr, dllPath, MAX_PATH);
+        PathRemoveFileSpec(dllPath);
+
+        // Launch ILSpy with the selected file
+        return LaunchILSpy(filePath);
+    }
+    CATCH_RETURN();
 
     IFACEMETHODIMP GetFlags(_Out_ EXPCMDFLAGS* flags) { *flags = ECF_DEFAULT; return S_OK; }
 
