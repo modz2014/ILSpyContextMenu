@@ -1,0 +1,12 @@
+C:\Users\dawgz\Desktop\New folder\obj\Debug\net48\ContextReg.csproj.AssemblyReference.cache
+C:\Users\dawgz\Desktop\New folder\obj\Debug\net48\ContextReg.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dawgz\Desktop\New folder\obj\Debug\net48\ContextReg.csproj.CoreCompileInputs.cache
+C:\Users\dawgz\Desktop\New folder\bin\Debug\net48\ContextReg.pdb
+C:\Users\dawgz\Desktop\New folder\bin\Debug\net48\Windows.Foundation.FoundationContract.winmd
+C:\Users\dawgz\Desktop\New folder\bin\Debug\net48\Windows.Foundation.UniversalApiContract.winmd
+C:\Users\dawgz\Desktop\New folder\obj\Debug\net48\ContextReg.csproj.CopyComplete
+C:\Users\dawgz\Desktop\New folder\obj\Debug\net48\ContextReg.pdb
+C:\Users\dawgz\Desktop\New folder\bin\Debug\net48\ContextReg.exe.config
+C:\Users\dawgz\Desktop\New folder\bin\Debug\net48\ContextReg.exe
+C:\Users\dawgz\Desktop\New folder\obj\Debug\net48\ContextReg.csproj.SuggestedBindingRedirects.cache
+C:\Users\dawgz\Desktop\New folder\obj\Debug\net48\ContextReg.exe

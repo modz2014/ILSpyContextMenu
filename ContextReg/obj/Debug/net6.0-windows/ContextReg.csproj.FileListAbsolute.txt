@@ -1,0 +1,1 @@
+C:\Users\dawgz\Desktop\New folder\obj\Debug\net6.0-windows\ContextReg.csproj.AssemblyReference.cache
