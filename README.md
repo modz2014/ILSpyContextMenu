@@ -11,6 +11,11 @@ ContextMenu for ILSpy is a helpful extension that enhances the user experience o
 - Improved visual aesthetics.
 - Enhanced user experience.
 
+## Credits
+
+ContextMenu for ILSpy is built upon the foundation of the outstanding ILSpy project, a product of dedicated open-source contributors. We extend our sincere gratitude to the ILSpy team for their remarkable work and contribution to the .NET community.
+
+
 ## Installation
 
 To use ContextMenu for ILSpy, follow these steps:
