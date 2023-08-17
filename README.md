@@ -1,5 +1,19 @@
 # ContextMenu for ILSpy - New Windows 11 Context Menu Including Windows 10 now
 
+## Update 
+Change: ContextMenuImplementation.dll now needs to be placed in the same directory as ILSpy.exe.
+Rationale: This simplifies path handling and ensures that the correct paths are automatically constructed without additional calculations.
+
+Action:
+
+1. Place ContextMenuImplementation.dll in the same directory as ILSpy.exe.
+2. Utilize the provided code, including the LaunchILSpy function and the Invoke method, without modification.
+3. Register the context menu handler with the updated location of ContextMenuImplementation.dll.
+4. Confirm that COM registration and shell extension registration steps are performed accurately.
+
+Result: The context menu will work seamlessly, launching ILSpy.exe for the selected file, and no additional path information is required.
+
+
 
 ## Description
 
