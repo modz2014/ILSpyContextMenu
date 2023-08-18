@@ -312,6 +312,7 @@ protected:
 
 class __declspec(uuid("7A1E471F-0D43-4122-B1C4-D1AACE76CE9B")) ILSpyCommand1 final : public ILSpyCommand
 {
+    //Testing 
 //public:
     //const wchar_t* Title() override { return L"HelloWorld Command1"; }
     //const EXPCMDSTATE State(_In_opt_ IShellItemArray* selection) override { return ECS_DISABLED; }
