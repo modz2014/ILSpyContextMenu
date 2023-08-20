@@ -24,6 +24,8 @@ Experience ILSpy like never before with the ContextMenu for ILSpy extension. Thi
 
 ContextMenu for ILSpy builds upon the foundation of the outstanding ILSpy project, a result of relentless dedication from open-source contributors. Our heartfelt appreciation goes out to the ILSpy team for their incredible work and contributions to the .NET community.
 
+ILSpy: [https://github.com/icsharpcode/ILSpy](https://github.com/icsharpcode/ILSpy)
+
 ## Installation
 
 To incorporate ContextMenu for ILSpy into your workflow, follow these straightforward steps:
