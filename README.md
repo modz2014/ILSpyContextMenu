@@ -30,7 +30,7 @@ ContextMenu for [ILSpy](https://github.com/icsharpcode/ILSpy) builds upon the fo
 
 To incorporate ContextMenu for ILSpy into your workflow, follow these straightforward steps:
 
-1. Download the latest release from the [GitHub repository](https://github.com/modz2014/ILSpyContextMenu/releases).
+1. Download the latest release from the [Build](https://github.com/modz2014/ILSpyContextMenu/releases) Which Includes ILSpy as well.
 2. Extract the downloaded ZIP file to a location of your preference.
 
 ## Building the MSIX Package
