@@ -96,7 +96,7 @@ public:
             *cmdState = ECS_ENABLED;
             return S_OK;
         }
-        *cmdState = ECS_ENABLED;
+        *cmdState = ECS_HIDDEN;
         return S_OK;
     }
 
