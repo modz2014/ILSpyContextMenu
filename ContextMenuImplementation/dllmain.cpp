@@ -89,14 +89,43 @@ public:
 
     IFACEMETHODIMP GetToolTip(_In_opt_ IShellItemArray*, _Outptr_result_nullonfailure_ PWSTR* infoTip) { *infoTip = nullptr; return E_NOTIMPL; }
     IFACEMETHODIMP GetCanonicalName(_Out_ GUID* guidCommandName) { *guidCommandName = GUID_NULL;  return S_OK; }
+   
+    bool IsWindows11OrLater()
+    {
+        OSVERSIONINFOEX osvi;
+        ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
+        osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+        osvi.dwBuildNumber = 22000; // Minimum build number for Windows 11
+        DWORDLONG dwlConditionMask = 0;
+        VER_SET_CONDITION(dwlConditionMask, VER_BUILDNUMBER, VER_GREATER_EQUAL);
+
+        return VerifyVersionInfo(&osvi, VER_BUILDNUMBER, dwlConditionMask);
+    }
+
+
+
     IFACEMETHODIMP GetState(_In_opt_ IShellItemArray* selection, _In_ BOOL okToBeSlow, _Out_ EXPCMDSTATE* cmdState)
     {
-         if (selection && okToBeSlow)
+        // Check if the OS version is Windows 10 or earlier.
+     
+        bool isWindows11OrLater = IsWindows11OrLater();
+
+      
+        if (isWindows11OrLater)
         {
-            *cmdState = ECS_ENABLED;
-            return S_OK;
+            if (selection && okToBeSlow)
+            {
+                *cmdState = ECS_ENABLED;
+                return S_OK;
+            }
+            *cmdState = ECS_HIDDEN;
         }
-        *cmdState = ECS_HIDDEN;
+        else
+        {
+            // Handle other cases, if necessary.
+            *cmdState = ECS_ENABLED; // Show the context menu item by default.
+        }
+
         return S_OK;
     }
 
