@@ -118,12 +118,12 @@ public:
                 *cmdState = ECS_ENABLED;
                 return S_OK;
             }
-            *cmdState = ECS_HIDDEN;
+            *cmdState = ECS_HIDDEN; // Hides the classic context menu on windows 11
         }
         else
         {
             // Handle other cases, if necessary.
-            *cmdState = ECS_ENABLED; // Show the context menu item by default.
+            *cmdState = ECS_ENABLED; // Show the context menu item by default on other versions.
         }
 
         return S_OK;
