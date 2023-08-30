@@ -106,7 +106,7 @@ public:
 
     IFACEMETHODIMP GetState(_In_opt_ IShellItemArray* selection, _In_ BOOL okToBeSlow, _Out_ EXPCMDSTATE* cmdState)
     {
-        // Check if the OS version is Windows 10 or earlier.
+        
      
         bool isWindows11OrLater = IsWindows11OrLater();
 
