@@ -7,7 +7,7 @@
 #include <Shellapi.h>
 #include <Shlwapi.h>
 #include <Strsafe.h>
-
+#include <VersionHelpers.h>
 
 using namespace Microsoft::WRL;
 
@@ -90,40 +90,28 @@ public:
     IFACEMETHODIMP GetToolTip(_In_opt_ IShellItemArray*, _Outptr_result_nullonfailure_ PWSTR* infoTip) { *infoTip = nullptr; return E_NOTIMPL; }
     IFACEMETHODIMP GetCanonicalName(_Out_ GUID* guidCommandName) { *guidCommandName = GUID_NULL;  return S_OK; }
    
-    bool IsWindows11OrLater()
-    {
-        OSVERSIONINFOEX osvi;
-        ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
-        osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-        osvi.dwBuildNumber = 22000; // Minimum build number for Windows 11
-        DWORDLONG dwlConditionMask = 0;
-        VER_SET_CONDITION(dwlConditionMask, VER_BUILDNUMBER, VER_GREATER_EQUAL);
-
-        return VerifyVersionInfo(&osvi, VER_BUILDNUMBER, dwlConditionMask);
-    }
-
-
-
     IFACEMETHODIMP GetState(_In_opt_ IShellItemArray* selection, _In_ BOOL okToBeSlow, _Out_ EXPCMDSTATE* cmdState)
     {
-        
-     
-        bool isWindows11OrLater = IsWindows11OrLater();
+        // Check if the Windows version is 11 or greater
+        bool isWindows11OrGreater = IsWindowsVersionOrGreater(10,0,0);
 
-      
-        if (isWindows11OrLater)
+        if (isWindows11OrGreater)
         {
+            // If the Windows version is 11 or greater and a selection is provided and it's okay to be slow...
             if (selection && okToBeSlow)
             {
+                // Enable the context menu item
                 *cmdState = ECS_ENABLED;
                 return S_OK;
             }
-            *cmdState = ECS_HIDDEN; // Hides the classic context menu on windows 11
+             // Hide the context menu item on Windows 11 or greater
+            *cmdState = ECS_HIDDEN;
         }
         else
         {
             // Handle other cases, if necessary.
-            *cmdState = ECS_ENABLED; // Show the context menu item by default on other versions.
+            // Show the context menu item by default on other versions.
+            *cmdState = ECS_ENABLED;
         }
 
         return S_OK;
